@@ -1,0 +1,283 @@
+body {
+    background: white;
+    font-family: 'Radio Canada', sans-serif;
+    font-weight: 600;
+  }
+  
+  .padding-nav {
+    padding-top:175px;
+    position: relative;
+  }
+  nav.globalnav {
+    position:absolute;
+    width: 100%;
+    padding-top: 15px;
+    z-index: 99;
+  }
+
+  .contain-navend {
+    display: flex;
+  }
+
+  .accountdropdown {
+    .menu-icon:first-child {
+      padding-right:5px;
+    }
+    .menu-icon:last-child {
+      padding:0 0 0 5px;
+    }
+  }
+  /* Burger */
+  .burger {
+    display: none;
+    height: 30px;
+  }
+
+  #checkboxburger {
+    display: none !important;
+  }
+  
+  .toggleburger {
+    position: absolute;
+    width: 30px;
+    cursor: pointer;
+    display: block;
+    height: 25px;
+    right: 15px;
+    &:after {
+      content: 'MENU';
+      display: block;
+      line-height: 7;
+      font-size: 10px;
+      float: left;
+      height: 30px;
+    }
+  }
+  
+  .barburger {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 3px;
+    border-radius: 5px;
+    background: #ffffff;
+    color: inherit;
+    opacity: 1;
+    transition: none 0.35s cubic-bezier(.5,-0.35,.35,1.5) 0s;
+  }
+  
+  /***** Spin Animation burger *****/
+  
+  .bar--topburger {
+    bottom: calc(25% + 11px + 3px/ 2);
+    transition-property: bottom,transform;
+    transition-delay: calc(0s + 0.35s),0s;
+  }
+  
+  .bar--middleburger {
+    top: calc(50% - 3px/ 2);
+    transition-property: opacity;
+    transition-delay: calc(0s + 0.35s);
+  }
+  
+  .bar--bottomburger {
+    top: calc(25% + 12px + 3px/ 2);
+    transition-property: top,transform;
+    transition-delay: calc(0s + 0.35s),0s;
+  }
+  
+  .checkboxburgerchecked + .toggleburger .bar--topburger {
+    bottom: calc(50% - 3px/ 2);
+    transform: rotate(135deg);
+    transition-delay: 0s,calc(0s + 0.35s);
+  }
+  
+  .checkboxburgerchecked + .toggleburger .bar--middleburger {
+    opacity: 0;
+    transition-duration: 0s;
+    transition-delay: calc(0s + 0.35s);
+  }
+  
+  .checkboxburgerchecked + .toggleburger .bar--bottomburger {
+    top: calc(50% - 3px/ 2);
+    transform: rotate(225deg);
+    transition-delay: 0s,calc(0s + 0.35s);
+  }
+  #checkboxburger {
+    display: block;
+  }
+  /* /burger */
+
+  .containermenu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .container {
+    margin-right: auto; /* Marge droite automatique pour centrer le conteneur */
+    margin-left: auto; /* Marge gauche automatique pour centrer le conteneur */
+    padding-right: 1rem; /* Espacement à droite du conteneur */
+    padding-left: 1rem; /* Espacement à gauche du conteneur */
+    max-width: 1344px; /* Largeur maximale du conteneur (peut être ajustée selon les besoins) */
+  }
+  
+  .menumobile {
+    width: 80%;
+  }
+  /* Media query pour les écrans de taille moyenne (par exemple, tablettes) */
+  @media (max-width: 1055px) {
+    .menumobilecontainer {
+      .menu-item {
+      justify-content: left !important;
+      text-align: left !important;
+      padding: 0px 0 !important;
+      margin: 0 !important;
+      display: block;
+      }
+      button {
+        width: 100%;
+      }
+    }
+    .burger {
+      display: block;
+    }
+    .container {
+      padding-right: 0.5rem; /* Réduire l'espacement à droite pour les tablettes */
+      padding-left: 0.5rem; /* Réduire l'espacement à gauche pour les tablettes */
+    }
+    .contain-navend, .navcenter {
+      display: none;
+    }
+
+  }
+  
+  /* Media query pour les écrans de petite taille (par exemple, smartphones) */
+  @media (max-width: 640px) {
+    .containermenu {
+      height: 65px;
+      padding-bottom: 5px;
+      .burger {
+        margin-top: -15px;
+      }
+    }
+    .container {
+      padding-right: 0.25rem; /* Réduire davantage l'espacement à droite pour les smartphones */
+      padding-left: 0.25rem; /* Réduire davantage l'espacement à gauche pour les smartphones */
+    }
+  }
+  
+  /* DEBUT DE LA NAV */
+  .navstart {
+    align-items: center; 
+    display: flex;
+    img {
+        height: 35px;
+    }
+    .titlenav {
+        padding-left:10px;
+        font-size: 1.9em;
+    }
+  }
+
+  /* FIN DE LA NAV */
+  .navend {
+    text-align: right;
+    align-items: center;
+    display: flex;
+  }
+  
+  .menu-icon {
+    padding-right:5px;
+}
+
+  /* CENTRE DE LA NAV */
+  nav {
+  .menu {
+    display: flex;
+    position: relative;
+    overflow: hidden;
+    max-width: 100%;
+    padding:0px;
+    height: 60px;
+    justify-content: center; /* Centre horizontalement */
+    align-items: center; 
+  }
+  
+  .menu-item {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    color: #ffffff;
+    padding: 20px;
+    text-decoration: none;
+    transition: 0.3s;
+    margin: 0 6px;
+    z-index: 1;
+    font-weight: 500;
+    position: relative;
+    .menu-icon {
+        padding-right:10px;
+    }
+  }
+  .menu-item:before {
+    content: "";
+    position: absolute;
+    bottom: -6px;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background-color: #ffffff;
+    border-radius: 8px 8px 0 0;
+    opacity: 0;
+    transition: 0.3s;
+  }
+  
+  .menu-item:not(.is-active):hover:before {
+    opacity: 1;
+    bottom: 0;
+  }
+  
+  .menu-item:not(.is-active):hover {
+    color: #cccccc;
+  }
+  
+  .menu-indicator {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 3px;
+    transition: 0.4s;
+    height: 3px;
+    z-index: 1;
+    border-radius: 8px 8px 0 0;
+  }
+}
+ 
+  @media (max-width: 580px) {
+    .menu {
+      overflow: auto;
+    }
+  }
+
+
+  /* Animation scroll */
+  .navbar-scroll-hide {
+    transform: translateY(-75px);
+  }
+
+  .navbar-scroll-before-start {
+  transform: translateY(-75px);
+  z-index: 99;
+  transition-duration: 0.7s;
+  position:fixed !important;
+  }
+
+  .navbar-scroll-start {
+    transform: translateY(0px);
+    position: fixed !important;
+    background: #101014fa;
+    width: 100% !important;
+    z-index: 99;
+    transition-duration: 0.7s;
+  }

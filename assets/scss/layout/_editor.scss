@@ -1,0 +1,41 @@
+.editorblock {
+  display: flex;
+  justify-content: center;
+}
+
+.editor-container {
+    background: #ffffff1f;
+    width: auto;
+    border-radius: 10px;
+    padding: 15px;
+    border: solid 1px #ffffff30;
+    transition-duration: 0.3s;
+    &:hover {
+      border: solid 1px #ffffff;
+      transition-duration: 0.3s;
+    }
+    .editor-body {
+      .tiptap {
+      padding:10px 0 10px 0;
+      }
+    }
+    .n-divider {
+      margin-top: 5px !important;
+      margin-bottom: 0px !important;
+      &:nth-child(2) {
+        margin-top: 10px !important;
+        margin-bottom: 10px !important;
+      }
+  }
+  
+}
+
+.editor-footer {
+  text-align: right;
+  font-weight: 300;
+  font-size:0.9em;
+}
+
+.menu-item {
+  cursor: pointer;
+}

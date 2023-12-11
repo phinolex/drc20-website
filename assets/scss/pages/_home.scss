@@ -1,0 +1,34 @@
+/* SECTION STATS */
+.container-home-stats {
+    border-radius: 15px;
+    padding: 20px;
+    background: -webkit-linear-gradient(136deg, #6a454000, #6a4540a1, #6b3c5d78 );
+    text-align: center;
+}
+
+@keyframes slideUp {
+    0% {
+      transform: translateY(100%); // Commence caché
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0); // Retour au point initial
+      opacity: 1;
+    }
+  }
+
+  .effect-h1 {
+    display: inline-block; // Change le type de display
+    opacity: 0; // Commence caché
+    transform: translateY(100%); // Commence avec une translation
+    animation-name: slideUp;
+    animation-duration: 0.8s; // Durée de l'animation
+    animation-fill-mode: forwards; // L'élément reste dans l'état final après l'animation
+    animation-timing-function: ease; // Rend l'animation plus douce
+  }
+
+  @for $i from 1 through 12 { // Supposons qu'il y a 10 éléments
+    .effect-h1:nth-child(#{$i}) {
+      animation-delay: 0.065s * $i; // Augmente le délai pour chaque élément
+    }
+  }

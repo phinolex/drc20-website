@@ -1,0 +1,304 @@
+
+
+
+/* STEPPER SETTING NAIVEUI */
+
+.stepdisable {
+    opacity : 0.5 !important;
+    &:hover {
+        background: transparent !important;
+        color: rgba(255, 255, 255, 0.568) !important ;
+        cursor: no-drop !important;
+
+        border: solid 2px rgba(255, 255, 255, 0.568) !important;
+    }
+    .n-tag {
+        z-index: -1;
+    }
+}
+
+.stepper-container {
+    border-radius: 15px;
+    padding: 15px;
+    width: 100%;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    .n-steps {
+        .n-step:last-of-type {
+            .n-step-content {
+                width: auto !important;
+            }
+        }
+    }
+}
+.n-steps .n-step {
+    flex: auto !important;
+}
+
+
+/* Create FUND */
+.container-createfund {
+    h1 {
+        text-align: center;
+        font-size: 3.1em;
+        padding-bottom: 15px;
+    }
+    .container-stepinside {
+        border: solid 3px transparent;
+        padding: 0;
+        background: linear-gradient(#00000038, #0000005c) padding-box, linear-gradient(135deg, #c55ec8, #e99b61) border-box;
+        text-align: center;
+        align-items: center;
+        width: 100%;
+        border-radius: 15px;
+        // background: #212121;
+        // background: -webkit-linear-gradient(136deg, rgb(233 155 97 / 68%), rgb(227 117 155 / 62%), rgb(194 95 201 / 67%));
+        .container-stepinside-body {
+            border-radius: 10px;
+            padding: 20px;
+            // background: rgba(16, 16, 20, 0.2392156863);
+        }
+    }
+
+}
+
+.stepper-background {
+    background: -webkit-linear-gradient(136deg, rgb(107 60 93 / 0%), rgb(0 0 0 / 17%), rgb(107 60 93 / 0%));
+    border-radius: 10px;
+}
+.stepper-container {
+    // background: rgba(255, 255, 255, 0.055);
+    border-radius: 15px;
+
+  .n-steps {
+    display: inline-flex;
+  }
+}
+
+.container-stepinside-body {
+    background: rgba(16, 16, 20, 0.2392156863);
+    .tabs-container {
+        // background: #ffffff0d;
+        background: -webkit-linear-gradient(136deg, rgba(107, 60, 93, 0), rgba(0, 0, 0, 0.17), rgba(107, 60, 93, 0));
+
+        border-radius: 10px;
+        padding: 0 0 15px 0px;
+        button:first-of-type {
+            float: left;
+        }
+    }
+}
+/* ETAPE 1 */
+
+.containerstep {
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+
+}
+.gridstep  {
+    position: relative;
+    width: 550px;
+    z-index:0;
+    display: grid;
+    margin-right: 15px;
+    gap: 10px;
+    grid-template-areas: "a b c";
+    box-sizing: border-box !important;
+    grid-template-columns: 1fr 1fr 1fr; /* chaque colonne a la même largeur */
+}
+.button-step1 {
+    padding: 30px;
+    background: transparent;
+    border-radius: 10px;
+    border: solid 2px rgba(255, 255, 255, 0.705);
+    transition-duration: 0.5s;
+    cursor: pointer;
+    &:hover {
+        border: solid 2px white;
+        background: white;
+        transition-duration: 0.5s;
+        color: black;
+    }
+}
+
+/* STEP 2 */
+
+.editor-footer {
+    p {
+        margin-bottom: 0 !important;
+    }
+}
+.container-step-2 {
+    min-height: 585px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+        .titlesubstep {
+        padding: 15px 0 0 0;
+        float:left;
+        margin:0;
+        }
+
+}
+
+.button-next-step2 {
+    margin-top: 15px;
+}
+
+/* STEP 3 */
+
+.container-step-3 {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .step3-inside {
+        display: block;
+        width: 100%;
+        padding: 0 20%;
+    }
+}
+
+.button-next-step3 {
+    margin-top: 15px;
+}
+
+/* STEP 4 */
+
+.radio-inputs {
+    margin-top: 6px;
+    display: grid;
+    gap: 10px;
+    grid-template-areas: "a b c";
+    box-sizing: border-box !important;
+    grid-template-columns: 1fr 1fr 1fr;
+    label {
+        display: contents;
+    }
+  }
+
+  .radio-input:checked + .radio-tile {
+    border-color: #ffffff;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    color: #ffffff;
+    background:white;
+  }
+
+  .radio-input:checked + .radio-tile:before {
+    transform: scale(1);
+    opacity: 1;
+    background-color: #cd6cafdb;
+    border-color: #6e463e00;
+  }
+
+  .radio-input:checked + .radio-tile .radio-icon svg {
+    fill: #ffffff;
+    background: white;
+  }
+
+  .radio-input:checked + .radio-tile .radio-label {
+    color: #6b443e;
+    background:white;
+    .radio-input {
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1), 0 0 0 4px #cd6caf70;
+      }
+  }
+
+  .radio-input:focus + .radio-tile {
+    border-color: #ffffff;
+    background:white;
+    color: #cd6caf70 !important;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1), 0 0 0 4px #cd6caf70;
+  }
+
+  .radio-input:focus + .radio-tile:before {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  .radio-tile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+    background: transparent;
+    border-radius: 10px;
+    border: solid 2px rgba(255, 255, 255, 0.705);
+    transition-duration: 0.5s;
+    cursor: pointer;
+    border-radius: 0.5rem;
+    border: 2px solid #ffffff;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    transition: 0.15s ease;
+    cursor: pointer;
+    position: relative;
+  }
+
+  .radio-tile:before {
+    content: "";
+    position: absolute;
+    display: block;
+    width: 0.75rem;
+    height: 0.75rem;
+    border: 2px solid #cd6caf70;
+    background-color: #fff;
+    border-radius: 50%;
+    top: 0.25rem;
+    left: 0.25rem;
+    opacity: 0;
+    transform: scale(0);
+    transition: 0.25s ease;
+  }
+
+  .radio-tile:hover {
+    border-color: #ffffff;
+  }
+
+  .radio-tile:hover:before {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  .radio-icon svg {
+    width: 2rem;
+    height: 2rem;
+    fill: #ffffff;
+  }
+
+  .radio-label {
+    color: #ffffff;
+    transition: 0.375s ease;
+    text-align: center;
+  }
+
+  .radio-input {
+    clip: rect(0 0 0 0);
+    -webkit-clip-path: inset(100%);
+    clip-path: inset(100%);
+    height: 1px;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+  }
+
+  /* Amount */
+
+  .label-number {
+    border-radius: 15px;
+    border: solid 3px transparent;
+    padding: 15px;
+    background: linear-gradient(rgb(16 16 20 / 67%), #664449) padding-box, linear-gradient(135deg, #c55ec8, #e99b61) border-box;
+}
+  @keyframes spin {
+    0% {
+        --rotate: 0deg;
+    }
+    100% {
+        --rotate: 360deg;
+    }
+}
