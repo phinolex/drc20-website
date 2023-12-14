@@ -38,18 +38,21 @@
             <div class="menu-icon" >
             <naive-icon name="ph-rocket-launch"></naive-icon></div> {{ $t('nav_create_button') }}
           </n-button>
-          <n-button round="true" v-if="!isActivated"  @click="open" color="#e0cd81" ghost >
-            <div class="menu-icon" >
-            <naive-icon name="ph-wallet"></naive-icon></div> {{ $t('nav_connectwallet_button') }}
-          </n-button>
-          <n-dropdown :options="optionsprofil" @select="handleSelectprofil" v-if="isActivated" >
+
+          <n-dropdown :options="optionsprofil" @select="handleSelectprofil" v-if="!web3Store.account" >
             <n-button round="true" class="accountdropdown">
               <div class="menu-icon" ><naive-icon name="ph-user"></naive-icon></div>
-               {{ address ? `${address.slice(0, 8)}...` : '' }}
+              {{ shortenAddress(user.address) }}
                <div class="menu-icon" ><naive-icon name="ph-caret-down-fill"></naive-icon></div>
 
               </n-button>
           </n-dropdown>
+
+          <n-button round="true" v-else @click="connectWallet" color="#e0cd81" ghost >
+            <div class="menu-icon" >
+            <naive-icon name="ph-wallet"></naive-icon></div> {{ $t('nav_connectwallet_button') }}
+          </n-button>
+
 
 
           <n-dropdown
@@ -129,20 +132,20 @@
 
 </n-modal>
 
-<vd-board :connectors="connectors" dark/>
 
 </template>
-<script>
+<script lang="ts">
 import { useMessage } from "naive-ui";
 import { h, ref, watch } from 'vue'; // Importations Vue
 import { NaiveIcon } from "#components"; // Importation du composant NaiveIcon
-import { MetaMaskConnector, WalletConnectConnector, useBoard, useEthers } from 'vue-dapp'; // Importations Vue-Dapp
-import { ethers } from 'ethers'
-
-import abi from '~/assets/abi.js';
 
 
-const { address, chainId, signer, isActivated, account } = useEthers(); // Utilisation des hooks Vue-Dapp
+const web3Store = useWeb3Store()
+
+const connectError = ref(null)
+const connectErrorMessage = ref(null)
+
+
 
 const renderIcon = (iconClass) => {
   return () => h(NaiveIcon, { name: iconClass });
@@ -188,68 +191,15 @@ const options = [
   }
 ];
 
-const infuraId = "3c3b08b825524aff802a5e9fc6e9bbec"; // ID Infura
 
 export default {
+
   setup() {
-    const { open } = useBoard();
-
-    const { signer } = useEthers();
-    const contractAddress = '0x416E7121E1Ee49D90887D7AEc5915a70255825e8';
-    const contract = ref(null);
-
-    const readData = async () => {
-      if (contract.value) {
-        const data = await contract.value.someReadFunction();
-        console.log(data);
-      }
-    };
-
-    // Création d'une variable réactive pour la connexion
-    const isConnected = ref(false);
-
-    // Surveiller les changements de l'adresse du compte
-    watch(account, (newAccount) => {
-      isConnected.value = !!newAccount;
-    }, { immediate: true });
-
-    watch(signer, (newSigner) => {
-      if (newSigner) {
-        contract.value = new ethers.Contract(contractAddress, abi, newSigner);
-      }
-    }, { immediate: true });
-
-    const connectors = [
-      // Connecteurs pour MetaMask et WalletConnect
-      new MetaMaskConnector({
-        appUrl: "http://localhost:3000/",
-      }),
-      new WalletConnectConnector({
-        projectId: '80c55c1a9efb7ba1d32582051978a81d',
-        chains: [56],
-        showQrModal: true,
-        qrModalOptions: {
-          themeMode: 'dark',
-          themeVariables: undefined,
-          chainImages: false,
-          desktopWallets: undefined,
-          walletImages: undefined,
-          mobileWallets: undefined,
-          enableExplorer: false,
-          explorerAllowList: undefined,
-          tokenImages: false,
-          privacyPolicyUrl: undefined,
-          explorerDenyList: undefined,
-          termsOfServiceUrl: undefined,
-        },
-      }),
-    ];
-
     const { locale } = useI18n();
     const message = useMessage();
 
+    // Connect Wallet
     return {
-      address, chainId, connectors, open, signer, isConnected, isActivated, readData,
       showmenu: ref(false),
       showModal: ref(false),
       options,
@@ -285,6 +235,22 @@ export default {
     };
   },
   methods: {
+    async connectWallet() {
+  const accounts = await window.ethereum
+    .request({ method: "eth_requestAccounts" })
+    .catch((err) => {
+      if (err.code === 4001) {
+        console.log("Please connect to MetaMask.")
+      } else {
+        console.error("error", err)
+        connectError.value = "Error Connecting Account"
+        connectErrorMessage.value = err
+      }
+    })
+  console.log("account connected:", accounts)
+  await web3Store.setAccount(accounts[0])
+  console.log("set global account as:", web3Store.account)
+},
     checkScroll() {
       const scrollY = window.scrollY;
       this.isPalier1 = scrollY > 50;

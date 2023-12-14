@@ -8,7 +8,7 @@
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
-    "@bg-dev/nuxt-naiveui": "^1.5.2",
+    "@bg-dev/nuxt-naiveui": "^1.7.0",
     "@nuxt/devtools": "^1.0.0",
     "@nuxtjs/google-fonts": "^3.0.2",
     "@nuxtjs/i18n": "^8.0.0-rc.5",
@@ -21,6 +21,7 @@
   "dependencies": {
     "@ethersproject/abi": "^5.7.0",
     "@fontsource-variable/radio-canada": "^5.0.18",
+    "@metamask/detect-provider": "^2.0.0",
     "@pinia/nuxt": "^0.5.1",
     "@tiptap/core": "^2.0.0-beta.182",
     "@tiptap/extension-blockquote": "^2.0.0-beta.29",
@@ -60,10 +61,12 @@
     "@tiptap/extension-text-style": "^2.0.0-beta.26",
     "@tiptap/extension-underline": "^2.0.0-beta.25",
     "@tiptap/vue-3": "^2.0.0-beta.96",
+    "@vue-dapp/core": "^1.0.0-alpha.9",
     "@vueuse/nuxt": "^10.6.1",
     "@walletconnect/ethereum-provider": "^2.10.2",
     "@walletconnect/modal": "^2.6.2",
     "@walletconnect/web3-provider": "^1.8.0",
+    "@walletconnect/web3wallet": "^1.9.5",
     "element-tiptap": "^2.2.1",
     "ethers": "5.7.2",
     "https-browserify": "^1.0.0",
@@ -73,8 +76,10 @@
     "sass-loader": "^13.3.2",
     "url": "^0.11.0",
     "vfonts": "^0.0.3",
+    "viem": "^1.19.13",
     "vite-plugin-node-polyfills": "^0.16.0",
-    "vue-dapp": "^0.12.0-beta.7"
+    "vue-dapp": "^0.12.0-beta.7",
+    "web3": "^4.3.0"
   },
   "overrides": {
     "vue": "latest"

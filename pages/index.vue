@@ -6,5 +6,5 @@
 </template>
 
 <script>
-  
+
 </script>

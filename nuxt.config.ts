@@ -2,6 +2,14 @@ import { nodePolyfills } from 'vite-plugin-node-polyfills'
 
 
 export default defineNuxtConfig({
+  runtimeConfig: {
+    BLOG_CONTRACT: "0x2f7C319eDf93364976E548E659f3400d5A511Ff0",
+    public: {
+      PROJECT_ID: "80c55c1a9efb7ba1d32582051978a81d", // ID WALLETCONNECT
+      TEST_VARIABLE: "Hello Dotenv",
+    },
+  },
+
   ssr: false,
   devtools: { enabled: false },
     app: {
@@ -34,6 +42,9 @@ export default defineNuxtConfig({
         },
       ],
     ],
+    imports: {
+      dirs: ["stores"],
+    },
     css: [
     "@/assets/main.scss",
     ],

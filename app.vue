@@ -5,10 +5,12 @@
           <n-loading-bar-provider>
             <n-dialog-provider>
                 <n-message-provider>
-
-                <LazyNavbar/>    
-                <Lazynuxt-page />
-                <LazyFooter/> 
+                  <!-- wallet -->
+                  <Wallet/>
+                    <LazyNavbar/>
+                    <Lazynuxt-page />
+                    <LazyFooter/>
+                  <!-- </> wallet -->
                 </n-message-provider>
 
             </n-dialog-provider>
