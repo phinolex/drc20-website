@@ -39,6 +39,7 @@
             <naive-icon name="ph-rocket-launch"></naive-icon></div> {{ $t('nav_create_button') }}
           </n-button>
 
+
           <n-dropdown :options="optionsprofil" @select="handleSelectprofil" v-if="!web3Store.account" >
             <n-button round="true" class="accountdropdown">
               <div class="menu-icon" ><naive-icon name="ph-user"></naive-icon></div>
