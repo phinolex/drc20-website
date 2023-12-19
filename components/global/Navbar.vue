@@ -39,17 +39,17 @@
             <naive-icon name="ph-rocket-launch"></naive-icon></div> {{ $t('nav_create_button') }}
           </n-button>
 
-
-          <n-dropdown :options="optionsprofil" @select="handleSelectprofil" v-if="!web3Store.account" >
+          <n-dropdown :options="optionsprofil" @select="handleSelectprofil" v-if="web3Store.account">
             <n-button round="true" class="accountdropdown">
               <div class="menu-icon" ><naive-icon name="ph-user"></naive-icon></div>
-              {{ shortenAddress(user.address) }}
+              {{ web3Store.account.length > 12 ? `${web3Store.account.slice(0, 4)}...${web3Store.account.slice(-6)}` : web3Store.account }}
+
                <div class="menu-icon" ><naive-icon name="ph-caret-down-fill"></naive-icon></div>
 
               </n-button>
           </n-dropdown>
 
-          <n-button round="true" v-else @click="connectWallet" color="#e0cd81" ghost >
+          <n-button round="true" v-else @click="WalletConnect.connect()" color="#e0cd81" ghost >
             <div class="menu-icon" >
             <naive-icon name="ph-wallet"></naive-icon></div> {{ $t('nav_connectwallet_button') }}
           </n-button>
@@ -135,17 +135,43 @@
 
 
 </template>
-<script lang="ts">
+
+<script setup lang="ts">
 import { useMessage } from "naive-ui";
 import { h, ref, watch } from 'vue'; // Importations Vue
-import { NaiveIcon } from "#components"; // Importation du composant NaiveIcon
+import { NaiveIcon } from "#components";
 
+// Wallet Connect Composable
+import WalletConnectComposable from "@/composables/useWeb3Modal"
+const WalletConnect = WalletConnectComposable()
 
+// Vanilla Setup
 const web3Store = useWeb3Store()
-
 const connectError = ref(null)
 const connectErrorMessage = ref(null)
 
+console.log("account" + web3Store.account)
+
+// Vanilla Connect Wallet
+async function connectWallet() {
+  const accounts = await window.ethereum
+    .request({ method: "eth_requestAccounts" })
+    .catch((err) => {
+      if (err.code === 4001) {
+        console.log("Please connect to MetaMask.")
+      } else {
+        console.error("error", err)
+        connectError.value = "Error Connecting Account"
+        connectErrorMessage.value = err
+      }
+    })
+  console.log("account connected:", accounts)
+  await web3Store.setAccount(accounts[0])
+  console.log("set global account as:", web3Store.account)
+}
+
+
+console.log("account: " + web3Store.account)
 
 
 const renderIcon = (iconClass) => {
@@ -193,108 +219,82 @@ const options = [
 ];
 
 
-export default {
+const showmenu = ref(false);
+const showModal = ref(false);
 
-  setup() {
-    const { locale } = useI18n();
-    const message = useMessage();
+const isPalier1 = ref(false);
+const isPalier2 = ref(false);
+const isPalier3 = ref(false);
+const activeItem = ref('home');
+const activeColor = ref('white');
+const indicatorWidth = ref(1);
+const indicatorLeft = ref(1);
+const menuItems = ref([
+  // Vos éléments de menu
+]);
 
-    // Connect Wallet
-    return {
-      showmenu: ref(false),
-      showModal: ref(false),
-      options,
-      optionsprofil,
-      handleSelectprofil(key) {
-        if(key === "Disconnected") {
-          console.log("déconnecté")
-        }
-      },
-      handleSelect(key) {
-        console.log("langue : " + key)
-        locale.value = key;
-        if(key) {
-          // Actions supplémentaires en cas de sélection de langue
-        }
-        // message.info(String(key));
-      }
-    };
-  },
-  data() {
-    return {
-      isPalier1: false,
-      isPalier2: false,
-      isPalier3: false,
-      activeItem: 'home',
-      activeColor: 'white',
-      indicatorWidth: 1,
-      indicatorLeft: 1,
-      menuItems: [
-        { id: 'home', href: '/', label: 'nav_home_text', name: 'ph-house-fill' },
-        { id: 'support', href: '/', label: 'nav_search_text', name: 'ph-magnifying-glass' },
-      ],
-    };
-  },
-  methods: {
-    async connectWallet() {
-  const accounts = await window.ethereum
-    .request({ method: "eth_requestAccounts" })
-    .catch((err) => {
-      if (err.code === 4001) {
-        console.log("Please connect to MetaMask.")
-      } else {
-        console.error("error", err)
-        connectError.value = "Error Connecting Account"
-        connectErrorMessage.value = err
-      }
-    })
-  console.log("account connected:", accounts)
-  await web3Store.setAccount(accounts[0])
-  console.log("set global account as:", web3Store.account)
-},
-    checkScroll() {
-      const scrollY = window.scrollY;
-      this.isPalier1 = scrollY > 50;
-      this.isPalier2 = scrollY > 80;
-      this.isPalier3 = scrollY > 200;
-    },
-    goToPage() {
-      this.$router.push('/ma-nouvelle-page');
-    },
-    handleItemClick(item, color) {
-      this.activeItem = item;
-      this.updateIndicator();
-    },
-    updateIndicator() {
-      this.$nextTick(() => {
-        const selectedItem = document.querySelector('.menu-item.is-active');
-        if (selectedItem) {
-          this.indicatorWidth = selectedItem.offsetWidth;
-          this.indicatorLeft = selectedItem.offsetLeft;
-        }
-      });
-    },
-    handleWindowResize() {
-      this.updateIndicator();
-    },
-  },
-  mounted() {
-    window.addEventListener('scroll', this.checkScroll);
-    this.updateIndicator();
-    window.addEventListener('resize', this.handleWindowResize);
-  },
-  beforeDestroy() {
-    window.removeEventListener('scroll', this.checkScroll);
-    window.removeEventListener('resize', this.handleWindowResize);
-  },
-  computed: {
-    classes() {
-      return {
-        'navbar-scroll-hide': this.isPalier1,
-        'navbar-scroll-before-start': this.isPalier2,
-        'navbar-scroll-start': this.isPalier3
-      };
+function handleSelectprofil(key) {
+  if (key === "Disconnected") {
+    console.log("déconnecté");
+  }
+}
+
+function handleSelect(key) {
+  console.log("langue : " + key);
+  locale.value = key;
+  if (key) {
+    // Actions supplémentaires en cas de sélection de langue
+  }
+  // message.info(String(key));
+}
+
+
+function checkScroll() {
+  const scrollY = window.scrollY;
+  isPalier1.value = scrollY > 50;
+  isPalier2.value = scrollY > 80;
+  isPalier3.value = scrollY > 200;
+}
+
+function goToPage() {
+  this.$router.push('/ma-nouvelle-page');
+}
+
+function handleItemClick(item, color) {
+  activeItem.value = item;
+  updateIndicator();
+}
+
+function updateIndicator() {
+  nextTick(() => {
+    const selectedItem = document.querySelector('.menu-item.is-active');
+    if (selectedItem) {
+      indicatorWidth.value = selectedItem.offsetWidth;
+      indicatorLeft.value = selectedItem.offsetLeft;
     }
-  },
-};
+  });
+}
+
+function handleWindowResize() {
+  updateIndicator();
+}
+
+onMounted(() => {
+  window.addEventListener('scroll', checkScroll);
+  updateIndicator();
+  window.addEventListener('resize', handleWindowResize);
+});
+
+onBeforeUnmount(() => {
+  window.removeEventListener('scroll', checkScroll);
+  window.removeEventListener('resize', handleWindowResize);
+});
+
+const classes = computed(() => {
+  return {
+    'navbar-scroll-hide': isPalier1.value,
+    'navbar-scroll-before-start': isPalier2.value,
+    'navbar-scroll-start': isPalier3.value
+  };
+});
 </script>

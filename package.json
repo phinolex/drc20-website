@@ -67,6 +67,7 @@
     "@walletconnect/modal": "^2.6.2",
     "@walletconnect/web3-provider": "^1.8.0",
     "@walletconnect/web3wallet": "^1.9.5",
+    "@web3modal/ethers5": "^3.5.0",
     "element-tiptap": "^2.2.1",
     "ethers": "5.7.2",
     "https-browserify": "^1.0.0",

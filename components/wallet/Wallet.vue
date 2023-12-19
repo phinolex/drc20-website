@@ -3,21 +3,19 @@ import Web3 from "web3"
 import blogContractABI from "@/abis/abi.json"
 import detectEthereumProvider from "@metamask/detect-provider"
 
-const web3Store = useWeb3Store()
-
 // Wallet Connect
 import { Core } from "@walletconnect/core"
 import { Web3Wallet } from "@walletconnect/web3wallet"
 import { buildApprovedNamespaces, getSdkError } from "@walletconnect/utils"
 
-const runtimeConfig = useRuntimeConfig() // dotenv setup via nuxt.config
+
+
+const runtimeConfig = useRuntimeConfig()
+const web3Store = useWeb3Store()
 
 const core = new Core({
   projectId: runtimeConfig.public.PROJECT_ID,
 })
-
-
-console.log("core:", core)
 
 const web3wallet = await Web3Wallet.init({
   core, // <- pass the shared `core` instance
@@ -61,6 +59,7 @@ async function onSessionProposal({ id, params }) {
     })
   }
 }
+
 
 web3wallet.on("session_proposal", onSessionProposal)
 
