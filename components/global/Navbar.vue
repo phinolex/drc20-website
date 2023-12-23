@@ -48,11 +48,19 @@
 
               </n-button>
           </n-dropdown>
+          <w3m-account-button v-if="web3Store.account" />
+      <n-button
+        v-if="!web3Store.account"
+        @click="WalletConnect.connect()"
 
-          <n-button round="true" v-else @click="WalletConnect.connect()" color="#e0cd81" ghost >
+        >Wallet Connect</n-button>
+      >
+       <w3m-button />
+
+          <!-- <n-button round="true" v-else @click="WalletConnect.connect()" color="#e0cd81" ghost >
             <div class="menu-icon" >
             <naive-icon name="ph-wallet"></naive-icon></div> {{ $t('nav_connectwallet_button') }}
-          </n-button>
+          </n-button> -->
 
 
 
@@ -78,10 +86,9 @@
   <div class="padding-nav"></div>
 
 
-<!--
   <p>Address: {{address}}</p>
 <p>Chain: {{chainId}}</p>
- -->
+
 
 
 <!-- POPUP MENU MOBILE -->
