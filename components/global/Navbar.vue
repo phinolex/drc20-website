@@ -157,7 +157,7 @@ const web3Store = useWeb3Store()
 const connectError = ref(null)
 const connectErrorMessage = ref(null)
 
-console.log("account" + web3Store.account)
+
 
 // Vanilla Connect Wallet
 async function connectWallet() {
@@ -176,10 +176,6 @@ async function connectWallet() {
   await web3Store.setAccount(accounts[0])
   console.log("set global account as:", web3Store.account)
 }
-
-
-console.log("account: " + web3Store.account)
-
 
 const renderIcon = (iconClass) => {
   return () => h(NaiveIcon, { name: iconClass });

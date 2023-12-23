@@ -31,11 +31,15 @@ import Web3 from "web3"
 import blogContractABI from "/abis/abi.json"
 import detectEthereumProvider from "@metamask/detect-provider"
 
+// .env setup via nuxt.config.ts
+// Vanilla (web3)
 // Wallet Connect (Modal)
 import { createWeb3Modal, defaultConfig } from "@web3modal/ethers5/vue"
 // Wallet Connect (Wallet) -- CURRENTLY BREAKS SITE (heartbeat module issue)
  import { Core } from "@walletconnect/core";
  import { Web3Wallet } from "@walletconnect/web3wallet";
+
+
 
 // Vanilla (web3)
 const web3Store = useWeb3Store() // web3
@@ -46,11 +50,11 @@ const projectId = runtimeConfig.public.PROJECT_ID
 
 // 2. Set chains
 const mainnet = {
-  chainId: 1,
-  name: "Ethereum",
-  currency: "ETH",
+  chainId: 97,
+  name: "BSC",
+  currency: "BNB",
   explorerUrl: "https://etherscan.io",
-  rpcUrl: "https://cloudflare-eth.com",
+  rpcUrl: "wss://bsc-testnet.publicnode.com",
 }
 
 // 3. Create modal
@@ -68,22 +72,23 @@ createWeb3Modal({
   projectId,
 })
 
- // WalletConnect (Wallet) -- CURRENTLY BREAKS SITE (heartbeat module issue)
+// WalletConnect (Wallet) -- CURRENTLY BREAKS SITE (heartbeat module issue)
  const core = new Core({
-   projectId: runtimeConfig.public.PROJECT_ID,
- });
+//   projectId: runtimeConfig.public.PROJECT_ID,
+});
  console.log("core initialized:", core);
 
  const web3wallet = await Web3Wallet.init({
    core, // <- pass the shared `core` instance
    metadata: {
-       name: "Nuxt x Solidity",     description:
+     name: "Nuxt x Solidity",
+    description:
       "Nuxt.js / Solidity / web3 / WalletConnect / Tailwind / MetaMask",
-     url: "https://nuxt-solidity-jeremykung.vercel.app/",
-     icons: [],
+    url: "https://nuxt-solidity-jeremykung.vercel.app/",
+    icons: [],
    },
-});
-console.log("web3wallet initialized:", web3wallet);
+ });
+ console.log("web3wallet initialized:", web3wallet);
 
 // Vanilla (web3)
 onMounted(async () => {
@@ -125,5 +130,4 @@ onMounted(async () => {
   }
 })
 
-// console.log("abi:", contractABI)
 </script>
