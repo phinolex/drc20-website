@@ -3,7 +3,7 @@ import { ThemeConfig } from '@bg-dev/nuxt-naiveui'
 const textColor = '#4c4f69'
 const textColorDark = '#ffffff'
 const titleTextColor = '#5c5f77'
-const titleTextColorDark = '#babbf1'
+const titleTextColorDark = '#e0cd81'
 
 const link = '#e0cd81'
 const linkHover = '#e0cd81'

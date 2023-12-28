@@ -15,7 +15,7 @@
         </div>
           <n-divider></n-divider>
 
-          <n-button color="white" round><n-space justify="center" align="center">GET THIS BOT - 20 $DOGE <img src="https://assets.coingecko.com/coins/images/5/standard/dogecoin.png" width="20"/></n-space></n-button>
+          <n-button @click="showModal = true" color="white" round><n-space justify="center" align="center">GET THIS BOT - 20 $DOGE <img src="https://assets.coingecko.com/coins/images/5/standard/dogecoin.png" width="20"/></n-space></n-button>
         </div>
 
         <div class="container-bot">
@@ -118,10 +118,28 @@
         </div>
       </div>
       </div>
+
+
+      <n-modal v-model:show="showModal"
+      preset="card"
+      :style="bodyStyle"
+      title="Buy $DOGI bot"
+      :bordered="true">
+
+        <modal> </modal>
+
+      </n-modal>
        </template>
 
 <script setup>
 const carouselRef = ref(null);
+
+const showModal = ref(false);
+
+const bodyStyle = {
+  width: '600px'
+};
+
 
 const nextSlide = () => {
     console.log("Next slide");

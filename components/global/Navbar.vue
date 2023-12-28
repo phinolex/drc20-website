@@ -48,14 +48,13 @@
 
               </n-button>
           </n-dropdown>
-          <w3m-account-button v-if="web3Store.account" />
       <n-button
+      round
         v-if="!web3Store.account"
         @click="WalletConnect.connect()"
 
         >Wallet Connect</n-button>
-      >
-       <w3m-button />
+
 
           <!-- <n-button round="true" v-else @click="WalletConnect.connect()" color="#e0cd81" ghost >
             <div class="menu-icon" >
@@ -84,12 +83,6 @@
 </nav>
 
   <div class="padding-nav"></div>
-
-
-  <p>Address: {{address}}</p>
-<p>Chain: {{chainId}}</p>
-
-
 
 <!-- POPUP MENU MOBILE -->
 <n-drawer v-model:show="showmenu" class="menumobile">
