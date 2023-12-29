@@ -126,12 +126,15 @@
       title="Buy $DOGI bot"
       :bordered="true">
 
-        <modal> </modal>
+    <Homemodal/>
 
       </n-modal>
        </template>
 
 <script setup>
+    import Homemodal from  '../components/home/modal'
+
+
 const carouselRef = ref(null);
 
 const showModal = ref(false);
