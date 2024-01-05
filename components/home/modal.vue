@@ -4,6 +4,17 @@
         <n-step title="Pay"></n-step>
         <n-step title="BOT access"></n-step>
     </n-steps>
+
+    <n-tabs v-model:value="currentTab" animated>
+      <n-tab-pane name="1">
+        test
+        <n-button @click="nextStep">suivant</n-button>
+      </n-tab-pane>
+
+      <n-tab-pane name="2">
+        test
+      </n-tab-pane>
+    </n-tabs>
 </div>
 </template>
 
