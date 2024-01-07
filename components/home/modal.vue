@@ -36,3 +36,9 @@ const prevStep = () => {
 };
 </script>
 
+<style>
+/* Cache les onglets tout en gardant leur contenu */
+.tabs-container .n-tabs-tab {
+    display: none;
+}
+</style>
